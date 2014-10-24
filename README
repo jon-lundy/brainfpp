@@ -1,4 +1,22 @@
-available test programs:
+brainfpp is a rudimentary C++ interpreter for the esoteric language BrainF*** (BF). An introduction to BF can be found at the following location:
 
-helloworld.b
-rot13.b
+http://rosettacode.org/wiki/Category:Brainf*** (yes, those stars are the actual URL.)
+
+This interpreter makes the following assumptions about its run environment:
+* There are 30000 data cells. If the pointer moves out of the bounds of these cells, it wraps around to the other side.
+* Each data cell holds one char.
+* Characters in the input file that are not one of the 8 recognized operators are simply ignored.
+* The read input (,) operator does not change the value at the data pointer on EOF or error. 
+
+The interpreter currently does the following when run:
+* Opens the input file and attempts to parse it into a tree representation of the program.
+* Prints out the tree.
+* If the supplied program requires input, prompts for it.
+* Runs the program.
+
+TODOs:
+* Make printing out the tree an option, instead of always doing it before running the input program.
+* Better organization -- break parsing out of main, potentially.
+* Allow for more environment options (i.e. customizing number of data cells or input operator behavior at EOF)
+* Better handling of input.
+* Include demo BF source files.
