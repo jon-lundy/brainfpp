@@ -2,6 +2,18 @@ brainfpp is a rudimentary C++ interpreter for the esoteric language BrainF*** (B
 
 http://rosettacode.org/wiki/Category:Brainf*** (yes, those stars are the actual URL.)
 
+Language basics:
+* BF instructions manipulate an array of data cells (aka "data tape") as well as a pointer to a single location on that tape.
+* The instructions are as follows:
+	>	increment the pointer's location by one
+	<	decrement the pointer's location by one
+	+	increment the value at the pointer by one
+	-	decrement the value at the pointer by one
+	[	jump forward to the corresponding ] if the value at the pointer is zero
+	]	jump backward to the corresponding [ if the value at the pointer is nonzero
+	.	write the value at the pointer to stdout, as a character
+	,	replace the value at the pointer with the next character from the input
+
 This interpreter makes the following assumptions about its run environment:
 * There are 30000 data cells. If the pointer moves out of the bounds of these cells, it wraps around to the other side.
 * Each data cell holds one char.
