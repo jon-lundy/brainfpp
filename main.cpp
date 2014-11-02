@@ -13,9 +13,10 @@
 
 const int TAPE_SIZE = 30000;
 
-void Usage()
+void Usage(const char* executable_name)
 {
-	std::cout << "Usage: brainfpp.exe <source file>" << std::endl;
+	std::cout << "BrainFPP Interpreter" << std::endl;
+	std::cout << "Usage: " << executable_name << " <source file>" << std::endl;
 }
 
 // Parses the program.  Note this allocates the tree, so you'll need to delete this pointer.
@@ -105,8 +106,7 @@ int main(int argc, char* argv[])
 {
 	// ensure source file is specified
 	if (argc < 2) {
-		Usage();
-		std::cin.get();
+		Usage(argc > 0 ? argv[0] : "brainfpp");
 		return -1;
 	}
 
@@ -118,7 +118,6 @@ int main(int argc, char* argv[])
 	// if parse was bad, bail out
 	if (program_root == NULL) {
 		std::cout << "Terminating due to parsing failure." << std::endl;
-		std::cin.get();
 		return -2;
 	}
 
