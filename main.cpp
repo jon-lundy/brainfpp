@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <cstring>
 #include "abstractnode.h"
 #include "datanode.h"
 #include "inputnode.h"
@@ -16,11 +17,13 @@ const int TAPE_SIZE = 30000;
 void Usage(const char* executable_name)
 {
 	std::cout << "BrainFPP Interpreter" << std::endl;
-	std::cout << "Usage: " << executable_name << " <source file>" << std::endl;
+	std::cout << "Usage: " << executable_name << " [-t] <source file>" << std::endl << std::endl;
+	std::cout << "Flags:" << std::endl;
+	std::cout << "\t--tree-only\tPrint program tree instead of executing" << std::endl << std::endl;
 }
 
 // Parses the program.  Note this allocates the tree, so you'll need to delete this pointer.
-const ProgramNode* Parse(char* file_name, bool& needs_input)
+const ProgramNode* Parse(const char* file_name, bool& needs_input)
 {
 	needs_input = false;
 
@@ -104,16 +107,32 @@ const ProgramNode* Parse(char* file_name, bool& needs_input)
 
 int main(int argc, char* argv[])
 {
-	// ensure source file is specified
+	// ensure at least one argument is provided (at least the source file must be present)
 	if (argc < 2) {
 		Usage(argc > 0 ? argv[0] : "brainfpp");
 		return -1;
 	}
-
+	
+	// source file should be the last argument
+	const char* source_file = argv[argc-1];
+	
+	// parse the flags, if present
+	bool tree_only = false;
+	for (int i = 1; i < argc-1; i++) {
+		if (strcmp(argv[i], "--tree-only") == 0) {
+			tree_only = true;
+		} else {
+			// unknown parameter
+			Usage(argv[0]);
+			std::cout << "Unknown parameter: " << argv[i] << std::endl;
+			return -1;
+		}
+	}
+	
 	// parse the source file
 	// this returns a pointer to a node created by NEW, so we better delete it later
 	bool needs_input = false;
-	const ProgramNode* program_root = Parse(argv[1], needs_input);
+	const ProgramNode* program_root = Parse(source_file, needs_input);
 
 	// if parse was bad, bail out
 	if (program_root == NULL) {
@@ -121,8 +140,11 @@ int main(int argc, char* argv[])
 		return -2;
 	}
 
-	// dump ast
-	program_root->DumpTree();
+	// dump ast, if requested
+	if (tree_only) {
+		program_root->DumpTree();
+		return 0;
+	}
 
 	// if we need input, grab it here:
 	std::istringstream input_stream;

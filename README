@@ -22,12 +22,15 @@ This interpreter makes the following assumptions about its run environment:
 
 The interpreter currently does the following when run:
 * Opens the input file and attempts to parse it into a tree representation of the program.
-* Prints out the tree.
+* If requested by command line flag, print out the program tree and exit. Otherwise, continue.
 * If the supplied program requires input, prompts for it.
 * Runs the program.
 
+Command line flags:
+--tree-only
+	Prints program tree after parsing instead of running program.
+
 TODOs:
-* Make printing out the tree an option, instead of always doing it before running the input program.
 * Better organization -- break parsing out of main, potentially.
 * Allow for more environment options (i.e. customizing number of data cells or input operator behavior at EOF)
 * Better handling of input.
