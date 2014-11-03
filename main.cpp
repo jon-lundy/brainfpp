@@ -51,22 +51,28 @@ const ProgramNode* Parse(const char* file_name, bool& needs_input)
 		// switch on input character
 		switch (c) {
 		case '>':
-			new PointerNode(parentStack.back(), 1);
+		case '<': {
+			char increment = (c == '>' ? 1 : -1);
+			int next = src.peek();
+			while (next == '>' || next == '<') {
+				src.get(c);
+				increment += (c == '>' ? 1 : -1);
+				next = src.peek();
+			}
+			new PointerNode(parentStack.back(), increment);
 			break;
-		case '<':
-			new PointerNode(parentStack.back(), -1);
-			break;
+		}
 		case '+':
 		case '-': {
-				char increment = (c == '+' ? 1 : -1);
-				int next = src.peek();
-				while (next == '+' || next == '-') {
-					src.get(c);
-					increment += (c == '+' ? 1 : -1);
-					next = src.peek();
-				}
-				new DataNode(parentStack.back(), increment, false);
-				break;
+			char increment = (c == '+' ? 1 : -1);
+			int next = src.peek();
+			while (next == '+' || next == '-') {
+				src.get(c);
+				increment += (c == '+' ? 1 : -1);
+				next = src.peek();
+			}
+			new DataNode(parentStack.back(), increment, false);
+			break;
 		}
 		case '.':
 			new OutputNode(parentStack.back());
