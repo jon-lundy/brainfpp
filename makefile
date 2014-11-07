@@ -1,13 +1,16 @@
 all: brainfpp
 
-brainfpp: main.o parser.o datanode.o inputnode.o loopnode.o outputnode.o pointernode.o programnode.o abstractnode.o programstate.o
-	g++ main.o parser.o datanode.o inputnode.o loopnode.o outputnode.o pointernode.o programnode.o abstractnode.o programstate.o -o brainfpp
+brainfpp: main.o parser.o tokenstream.o datanode.o inputnode.o loopnode.o outputnode.o pointernode.o programnode.o abstractnode.o programstate.o
+	g++ main.o parser.o tokenstream.o datanode.o inputnode.o loopnode.o outputnode.o pointernode.o programnode.o abstractnode.o programstate.o -o brainfpp
 
 main.o: main.cpp
 	g++ -c main.cpp
 
 parser.o: parser.cpp
 	g++ -c parser.cpp
+
+tokenstream.o: tokenstream.cpp
+	g++ -c tokenstream.cpp
 
 datanode.o: datanode.cpp
 	g++ -c datanode.cpp

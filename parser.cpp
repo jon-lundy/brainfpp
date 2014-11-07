@@ -1,4 +1,3 @@
-#include <fstream>
 #include <iostream>
 #include <vector>
 #include "abstractnode.h"
@@ -9,10 +8,11 @@
 #include "parser.h"
 #include "pointernode.h"
 #include "programnode.h"
+#include "tokenstream.h"
 
 Parser::Parser(const char* file_name) : 
 			file_name_(file_name),
-			source_stream_()
+			token_stream_(new TokenStream(file_name))
 {}
 
 const int Parser::SumAdjacentOperators(const char start_op, const char increment_op, const char decrement_op)
@@ -25,11 +25,14 @@ const int Parser::SumAdjacentOperators(const char start_op, const char increment
 	} else {
 		return 0;
 	}
-	int next = source_stream_.peek();
+	
+	// only peek, b/c if it's not a character we care about it should be left
+	// to the main parsing routine
+	char next = token_stream_->Peek();
 	while (next == increment_op || next == decrement_op) {
-		source_stream_.get();
 		total_diff += (next == increment_op ? 1 : -1);
-		next = source_stream_.peek();
+		token_stream_->Get();
+		next = token_stream_->Peek();
 	}
 	return total_diff;
 }
@@ -39,9 +42,8 @@ const ProgramNode* Parser::Parse(bool& program_requires_input)
 {
 	program_requires_input = false;
 
-	// attempt to open source file
-	source_stream_.open(file_name_);
-	if (!source_stream_.is_open()) {
+	// check that file opened OK
+	if (!token_stream_->IsOpen()) {
 		std::cout << "Failed to open " << file_name_ << ". Make sure the file exists and that the path is correct." << std::endl;
 		return NULL;
 	}
@@ -54,11 +56,10 @@ const ProgramNode* Parser::Parse(bool& program_requires_input)
 	parentStack.push_back(root);
 
 	// begin reading program
-	char c;
-	source_stream_.get(c);
+	char c = token_stream_->Get();
 
 	// loop until the read fails
-	while (source_stream_.good()) {
+	while (token_stream_->Good()) {
 		// switch on input character
 		switch (c) {
 		case '>':
@@ -97,15 +98,13 @@ const ProgramNode* Parser::Parse(bool& program_requires_input)
 			break;
 		}
 
-		source_stream_.get(c);
+		c = token_stream_->Get();
 	}
-
-	// cleanup
-	source_stream_.close();
 
 	return root;
 }
 
 Parser::~Parser(void)
 {
+	delete token_stream_;
 }
