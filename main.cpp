@@ -10,8 +10,8 @@ const int TAPE_SIZE = 30000;
 void Usage(const char* executable_name)
 {
 	std::cout << "BrainFPP Interpreter" << std::endl;
-	std::cout << "Usage: " << executable_name << " [-t] <source file>" << std::endl << std::endl;
-	std::cout << "Flags:" << std::endl;
+	std::cout << "Usage: " << executable_name << " <options> <source file>" << std::endl << std::endl;
+	std::cout << "Options:" << std::endl;
 	std::cout << "\t--tree-only\tPrint program tree instead of executing" << std::endl << std::endl;
 }
 
@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
 		} else {
 			// unknown parameter
 			Usage(argv[0]);
-			std::cout << "Unknown parameter: " << argv[i] << std::endl;
+			std::cout << "Unknown option: " << argv[i] << std::endl;
 			return -1;
 		}
 	}
