@@ -5,16 +5,15 @@
 #define TOKENSTREAM_H
 
 #include <fstream>
+#include "noncopyable.h"
 
-class TokenStream
+class TokenStream : NonCopyable<TokenStream>
 {
 private:
 	void AdvanceStream();
 	char next_token_;
 	bool finished_;
 	std::ifstream source_stream_;
-	const TokenStream& operator=(const TokenStream&); // no assign
-	TokenStream(const TokenStream&); // no copy
 public:
 	TokenStream(const char* file_name);
 	char Peek() const;

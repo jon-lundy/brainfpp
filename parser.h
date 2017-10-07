@@ -2,16 +2,17 @@
 
 #ifndef PARSER_H
 #define PARSER_H
+#include "noncopyable.h"
 #include "programnode.h"
 #include "tokenstream.h"
 
-class Parser
+class Parser : private NonCopyable<Parser>
 {
 private:
 	const char* file_name_;
 	TokenStream* token_stream_;
-	const int SumAdjacentOperators(const char start_op, const char increment_op, const char decrement_op);	
-	const Parser& operator=(const Parser&); // no assignment allowed (there should only be one)
+	const int SumAdjacentOperators(const char start_op, const char increment_op, const char decrement_op);
+
 public:
 	Parser(const char* file_name);
 	const ProgramNode* Parse(bool& program_requires_input);

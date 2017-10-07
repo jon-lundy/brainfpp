@@ -9,8 +9,6 @@
 class ProgramNode :
 	public AbstractNode
 {
-private:
-	const ProgramNode& operator=(const ProgramNode&);		// no assignment allowed
 protected:
 	const std::string ToString() const;
 public:

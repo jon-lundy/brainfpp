@@ -13,7 +13,6 @@ class DataNode :
 private:
 	const bool overwrite_;
 	const char step_;
-	const DataNode& operator=(const DataNode&);		// no assignment allowed
 protected:
 	const std::string ToString() const;
 public:

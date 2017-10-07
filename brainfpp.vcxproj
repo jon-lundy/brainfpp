@@ -116,6 +116,7 @@
     <ClInclude Include="datanode.h" />
     <ClInclude Include="inputnode.h" />
     <ClInclude Include="loopnode.h" />
+    <ClInclude Include="noncopyable.h" />
     <ClInclude Include="outputnode.h" />
     <ClInclude Include="parser.h" />
     <ClInclude Include="pointernode.h" />

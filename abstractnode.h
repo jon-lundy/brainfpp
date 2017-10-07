@@ -5,13 +5,13 @@
 #define ABSTRACTNODE_H
 #include <string>
 #include <iostream>
+#include "noncopyable.h"
 #include "programstate.h"
 
-class AbstractNode
+class AbstractNode : private NonCopyable<AbstractNode>
 {
 private:
 	void AdoptChild(AbstractNode* adoptee);
-	const AbstractNode& operator=(const AbstractNode&);		// no assignment allowed
 protected:
 	AbstractNode* next_sib_;
 	AbstractNode* first_child_;

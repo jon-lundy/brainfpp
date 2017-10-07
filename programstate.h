@@ -4,8 +4,9 @@
 #ifndef PROGRAMSTATE_H
 #define PROGRAMSTATE_H
 #include <iostream>
+#include "noncopyable.h"
 
-class ProgramState
+class ProgramState : NonCopyable<ProgramState>
 {
 private:
 	const unsigned int length_;	//number of cells on tape
@@ -14,7 +15,6 @@ private:
 	char* current_;			//current cell
 	std::istream& istream_;		//read data to here
 	std::ostream& ostream_;		//write data to here
-	const ProgramState& operator=(const ProgramState&);		// no assignment allowed
 public:
 	ProgramState(const unsigned int tape_length, std::istream& in, std::ostream& out);
 	void Move(const int displacement);

@@ -10,8 +10,6 @@
 class OutputNode :
 	public AbstractNode
 {
-private:
-	const OutputNode& operator=(const OutputNode&);		// no assignment allowed
 protected:
 	const std::string ToString() const;
 public:

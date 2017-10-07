@@ -10,8 +10,6 @@
 class LoopNode :
 	public AbstractNode
 {
-private:
-	const LoopNode& operator=(const LoopNode&);		// no assignment allowed
 protected:
 	const std::string ToString() const;
 public:

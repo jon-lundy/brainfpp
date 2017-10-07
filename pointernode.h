@@ -12,7 +12,6 @@ class PointerNode :
 {
 private:
 	const int step_;
-	const PointerNode& operator=(const PointerNode&);		// no assignment allowed
 protected:
 	const std::string ToString() const;
 public:
