@@ -1,2 +1,8 @@
 *.o
 brainfpp
+
+.vs
+Debug
+Release
+*.filters
+*.user
