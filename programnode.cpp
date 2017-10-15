@@ -4,17 +4,17 @@
 #include "programnode.h"
 #include "programstate.h"
 
-ProgramNode::ProgramNode(AbstractNode* parent) : AbstractNode(parent)
+ProgramNode::ProgramNode() : AbstractNode(nullptr)
 {
 }
 
 const AbstractNode* ProgramNode::Execute(ProgramState& state) const
 {
 	const AbstractNode* next_step = first_child_;
-	while (next_step != NULL) {
+	while (next_step != nullptr) {
 		next_step = next_step->Execute(state);
 	}
-	return NULL;
+	return nullptr;
 }
 
 const std::string ProgramNode::ToString() const

@@ -13,7 +13,7 @@ const AbstractNode* LoopNode::Execute(ProgramState& state) const
 {
 	while (state.Read() != 0) {
 		const AbstractNode* next_loop_step = first_child_;
-		while (next_loop_step != NULL) {
+		while (next_loop_step != nullptr) {
 			next_loop_step = next_loop_step->Execute(state);
 		}
 	}

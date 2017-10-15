@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
 	const ProgramNode* program_root = parser.Parse(needs_input);
 
 	// if parse was bad, bail out
-	if (program_root == NULL) {
+	if (program_root == nullptr) {
 		std::cout << "Terminating due to parsing failure." << std::endl;
 		return -2;
 	}

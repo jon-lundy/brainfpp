@@ -45,11 +45,11 @@ const ProgramNode* Parser::Parse(bool& program_requires_input)
 	// check that file opened OK
 	if (!token_stream_->IsOpen()) {
 		std::cout << "Failed to open " << file_name_ << ". Make sure the file exists and that the path is correct." << std::endl;
-		return NULL;
+		return nullptr;
 	}
 
 	// create root node
-	ProgramNode* root = new ProgramNode(NULL);
+	ProgramNode* root = new ProgramNode();
 
 	// create node stack, for loops
 	std::vector<AbstractNode*> parentStack;
@@ -90,7 +90,7 @@ const ProgramNode* Parser::Parse(bool& program_requires_input)
 			if (parentStack.size() == 0) {
 				std::cout << "Unexpected ] encountered!  No matching [ to close." << std::endl;
 				delete root;
-				return NULL;
+				return nullptr;
 			}
 			break;
 		default:

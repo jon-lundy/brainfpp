@@ -12,7 +12,7 @@ class ProgramNode :
 protected:
 	const std::string ToString() const;
 public:
-	ProgramNode(AbstractNode* parent);
+	explicit ProgramNode(); // doesn't take a parent, because ProgramNode is always the root
 	const AbstractNode* Execute(ProgramState& state) const;
 	void DumpTree() const;
 	~ProgramNode();

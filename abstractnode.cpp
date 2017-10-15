@@ -6,8 +6,8 @@
 
 AbstractNode::AbstractNode(AbstractNode* parent)
 {
-	first_child_ = last_child_ = next_sib_ = NULL;
-	if (parent != NULL) {
+	first_child_ = last_child_ = next_sib_ = nullptr;
+	if (parent != nullptr) {
 		parent->AdoptChild(this);
 	}
 }
@@ -19,7 +19,7 @@ void AbstractNode::TreeDumpVisitor(const int current_num_indents) const
 	}
 	std::cout << ToString() << std::endl;
 	AbstractNode* child_visitor = first_child_;
-	while (child_visitor != NULL) {
+	while (child_visitor != nullptr) {
 		child_visitor->TreeDumpVisitor(current_num_indents + 1);
 		child_visitor = child_visitor->next_sib_;
 	}
@@ -27,7 +27,7 @@ void AbstractNode::TreeDumpVisitor(const int current_num_indents) const
 
 void AbstractNode::AdoptChild(AbstractNode* adoptee)
 {
-	if (first_child_ == NULL) {
+	if (first_child_ == nullptr) {
 		first_child_ = adoptee;
 		last_child_ = adoptee;
 	} else {
@@ -40,10 +40,10 @@ AbstractNode::~AbstractNode()
 {
 	// each node deletes its first child, and then its next sibling
 	// in this way, the entire tree is cleaned up
-	if (first_child_ != NULL) {
+	if (first_child_ != nullptr) {
 		delete first_child_;
 	}
-	if (next_sib_ != NULL) {
+	if (next_sib_ != nullptr) {
 		delete next_sib_;
 	}
 }
