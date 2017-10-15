@@ -1,4 +1,4 @@
-brainfpp is a rudimentary C++ interpreter for the esoteric language BrainF*** (BF). An introduction to BF can be found at the following location:
+brainfpp is a rudimentary C++ interpreter for the esoteric language Brainfuck. (BF). An introduction to BF can be found at the following location:
 
 http://rosettacode.org/wiki/Category:Brainf*** (yes, those stars are the actual URL.)
 
@@ -26,12 +26,12 @@ The interpreter currently does the following when run:
 * If the supplied program requires input, prompts for it.
 * Runs the program.
 
-Command line flags:
+Command line options:
 --tree-only
 	Prints program tree after parsing instead of running program.
 
 TODOs:
-* Better organization -- break parsing out of main, potentially.
 * Allow for more environment options (i.e. customizing number of data cells or input operator behavior at EOF)
 * Better handling of input.
-* Include demo BF source files.
+* Include more demo BF source files.
+* Use more modern C++11 features where applicable.
